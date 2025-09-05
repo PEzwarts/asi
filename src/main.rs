@@ -394,7 +394,7 @@ sudo usermod -aG vboxusers $(whoami)
             .write_str(
                 format!(
                     r#"
-                    pacstrap -K /mnt base base-devel linux-lts linux-lts-headers linux-firmware grub efibootmgr xorg wayland amd-ucode intel-ucode alsa-firmware alsa-utils pulseaudio networkmanager wpa_supplicant reflector yay kitty git wget vim
+                    pacstrap -K /mnt base base-devel linux-lts linux-lts-headers linux-firmware grub efibootmgr xorg wayland amd-ucode intel-ucode alsa-firmware alsa-utils pulseaudio networkmanager wpa_supplicant reflector kitty git wget vim
                     genfstab -U /mnt >> /mnt/etc/fstab
                     arch-chroot /mnt /bin/bash -c "
                     "#
@@ -407,7 +407,7 @@ sudo usermod -aG vboxusers $(whoami)
             .write_str(
                 format!(
                     r#"
-                    pacstrap -K /mnt base base-devel linux-lts linux-lts-headers linux-firmware grub efibootmgr xorg wayland amd-ucode intel-ucode alsa-firmware alsa-utils pulseaudio networkmanager wpa_supplicant reflector {de} {gr} yay kitty git wget vim
+                    pacstrap -K /mnt base base-devel linux-lts linux-lts-headers linux-firmware grub efibootmgr xorg wayland amd-ucode intel-ucode alsa-firmware alsa-utils pulseaudio networkmanager wpa_supplicant reflector {de} {gr} kitty git wget vim
                     genfstab -U /mnt >> /mnt/etc/fstab
                     arch-chroot /mnt /bin/bash -c "
                     "#
