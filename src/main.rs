@@ -116,24 +116,22 @@ fi
             r#"
 echo ## MINIMAL SCRIPT ##
 
-if [ "ping archlinux.org" == *"failure"* ]; then
-    echo ## Enabling NetworkManager ##
-    echo ## Reboot needed! Execute min.sh again after reboot! ##
-    echo ## Type CTRL-C to abort ##
+echo ## Enabling NetworkManager ##
+echo ## Reboot needed! Execute min.sh again after reboot! ##
+echo ## Type CTRL-C to abort ##
 
-    sudo systemctl enable NetworkManager
+sudo systemctl enable --now NetworkManager wpa_supplicant
 
-    sleep 3
+sleep 3
 
-    echo [REBOOTING] .
-    sleep 1
-    echo [REBOOTING] ..
-    sleep 1
-    echo [REBOOTING] ...
-    sleep 1
+echo [REBOOTING] .
+sleep 1
+echo [REBOOTING] ..
+sleep 1
+echo [REBOOTING] ...
+sleep 1
 
-    reboot
-fi
+reboot
 
 # Basic caliber class software.
 sudo pacman -Syu --noconfirm librewolf torbrowser-launcher vlc qbittorrent
@@ -143,8 +141,6 @@ sudo pacman -S --noconfirm gnupg
 
 # Filesystem formats.
 sudo pacman -S --noconfirm ntfs-3g exfat-utils udiskie
-
-udiskie -a &
 
 {chaotic_cx}
             "#,
@@ -157,24 +153,22 @@ udiskie -a &
             r#"
 echo ## SERVER SCRIPT ##
 
-if [ "ping archlinux.org" == *"failure"* ]; then
-    echo ## Enabling NetworkManager ##
-    echo ## Reboot needed! Execute min.sh again after reboot! ##
-    echo ## Type CTRL-C to abort ##
+echo ## Enabling NetworkManager ##
+echo ## Reboot needed! Execute min.sh again after reboot! ##
+echo ## Type CTRL-C to abort ##
 
-    sudo systemctl enable NetworkManager
+sudo systemctl enable --now NetworkManager wpa_supplicant
 
-    sleep 3
+sleep 3
 
-    echo [REBOOTING] .
-    sleep 1
-    echo [REBOOTING] ..
-    sleep 1
-    echo [REBOOTING] ...
-    sleep 1
+echo [REBOOTING] .
+sleep 1
+echo [REBOOTING] ..
+sleep 1
+echo [REBOOTING] ...
+sleep 1
 
-    reboot
-fi
+{chaotic_cx}
 
 # Network utils.
 sudo pacman -Syu --noconfirm ufw
@@ -184,84 +178,6 @@ sudo pacman -S --noconfirm gnupg
 
 # Filesystem formats.
 sudo pacman -S --noconfirm ntfs-3g exfat-utils udiskie
-
-udiskie -a &
-
-{chaotic_cx}
-            "#,
-        )
-        .as_str(),
-    );
-
-    let fish: String = String::from(
-        format!(
-            r#"
-sudo pacman -S --noconfirm fish
-
-if [ ! grep -q "/usr/bin/fish" /etc/shells ]; then
-  echo /usr/bin/fish | sudo tee -a /etc/shells
-fi
-
-chsh -s /usr/bin/fish
-            "#
-        )
-        .as_str(),
-    );
-
-    let qemu: String = String::from(
-        format!(
-            r#"
-echo ## QEMU-desktop SCRIPT ##
-
-sleep 1
-echo .
-sleep 1
-echo ..
-sleep 1
-echo ...
-
-# QEMU-desktop.
-sudo pacman -S --noconfirm qemu-desktop libvirt edk2-ovmf virt-manager dnsmasq
-
-sudo systemctl enable --now libvirtd
-
-virsh net-autostart default
-virsh net-start default
-
-sudo modprobe kvm; echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs
-
-if [ cat /proc/cpuinfo | grep -e "vendor_id" == *"AMD"* ]; then
-    sudo cp kvm_amd.conf /etc/modprobe.d/kvm.conf
-else
-    sudo cp kvm.conf /etc/modprobe.d/kvm.conf
-fi
-
-sudo usermod -aG kvm $(whoami)
-sudo usermod -aG libvirt $(whoami)
-sudo usermod -aG input $(whoami)
-            "#,
-        )
-        .as_str(),
-    );
-
-    let vbox: String = String::from(
-        format!(
-            r#"
-echo ## VirtualBox SCRIPT ##
-
-sleep 1
-echo .
-sleep 1
-echo ..
-sleep 1
-echo ...
-
-# Virtualbox.
-sudo pacman -S --noconfirm virtualbox virtualbox-host-modules-lts
-
-modprobe vboxdrv
-
-sudo usermod -aG vboxusers $(whoami)
             "#,
         )
         .as_str(),
@@ -560,17 +476,11 @@ Include = /etc/pacman.d/mirrorlist
         "/mnt/README.md",
         format!(
             "
-
 min.sh is used for an minimal installation of software used by many.
 
 srv.sh is used for an minimal installation of software used by server maintainers.
 
-qemu.sh is used to install an qemu virtualization enviroment.
-
-vbox.sh is used to install an virtualbox virtualization enviroment.
-
 harden.sh is used to harden your current system to be more resistant towards malware. This is optional.
-
             "
         )
         .as_str(),
@@ -591,45 +501,12 @@ harden.sh is used to harden your current system to be more resistant towards mal
         .unwrap();
     fs::write("/mnt/srv.sh", srv).unwrap();
 
-    for user in users {
-        File::create(format!("/mnt/home/{user}/fish.sh")).unwrap();
-
-        Command::new("sudo")
-            .args([
-                format!("chown").as_str(),
-                format!("{user}:{user}").as_str(),
-                format!("/mnt/home/{user}/fish.sh").as_str(),
-            ])
-            .status()
-            .unwrap();
-
-        Command::new("sudo")
-            .args(["chown", "u+x", format!("/mnt/home/{user}/fish.sh").as_str()])
-            .status()
-            .unwrap();
-        fs::write(format!("/mnt/home/{user}/fish.sh"), fish.clone()).unwrap();
-    }
-
     File::create("/mnt/harden.sh").unwrap();
     Command::new("chmod")
         .args(["u+x", "/mnt/harden.sh"])
         .status()
         .unwrap();
     fs::write("/mnt/harden.sh", format!("{sec_krl}{sec_net}{sec_fs}")).unwrap();
-
-    File::create("/mnt/qemu.sh").unwrap();
-    Command::new("chmod")
-        .args(["u+x", "/mnt/qemu.sh"])
-        .status()
-        .unwrap();
-    fs::write("/mnt/qemu.sh", qemu).unwrap();
-
-    File::create("/mnt/vbox.sh").unwrap();
-    Command::new("chmod")
-        .args(["u+x", "/mnt/vbox.sh"])
-        .status()
-        .unwrap();
-    fs::write("/mnt/vbox.sh", vbox).unwrap();
 
     Command::new("umount")
         .args(["-r", "/mnt"])

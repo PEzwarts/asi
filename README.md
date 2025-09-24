@@ -1,5 +1,5 @@
 
-## Version 1.0.1-s (stable)
+## Version 1.0.2-s (stable)
 
 ASI is an Rust based Open-Source Project.
 
@@ -8,7 +8,7 @@ ASI is an acronym which stands for Arch System Installer, intended to be used to
 ### Features
 
 * Minimal
-* ChaoticCX included; ~/../../min.sh
+* ChaoticCX
 * Security; ~/../../harden.sh
 
 ### Usage with Ventoy
