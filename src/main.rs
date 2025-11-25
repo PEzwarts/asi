@@ -131,8 +131,6 @@ sleep 1
 echo [REBOOTING] ...
 sleep 1
 
-reboot
-
 # Basic caliber class software.
 sudo pacman -Syu --noconfirm librewolf torbrowser-launcher vlc qbittorrent
 
