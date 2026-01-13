@@ -1,5 +1,3 @@
-pub mod func;
-
 use std::{
     fmt::Write,
     fs::{self, File},
@@ -124,25 +122,23 @@ echo ## Type CTRL-C to abort ##
 
 sudo systemctl enable --now NetworkManager wpa_supplicant
 
-sleep 3
+{chaotic_cx}
 
-echo [REBOOTING] .
+echo [INSTALL] .
 sleep 1
-echo [REBOOTING] ..
+echo [INSTALL] ..
 sleep 1
-echo [REBOOTING] ...
+echo [INSTALL] ...
 sleep 1
 
-# Basic caliber class software.
+# Basic caliber class software
 sudo pacman -Syu --noconfirm librewolf torbrowser-launcher vlc qbittorrent
 
-# Cryptographic utils.
+# Cryptographic utils
 sudo pacman -S --noconfirm gnupg
 
-# Filesystem formats.
+# Filesystem formats
 sudo pacman -S --noconfirm ntfs-3g exfat-utils udiskie
-
-{chaotic_cx}
             "#,
         )
         .as_str(),
@@ -159,24 +155,22 @@ echo ## Type CTRL-C to abort ##
 
 sudo systemctl enable --now NetworkManager wpa_supplicant
 
-sleep 3
-
-echo [REBOOTING] .
-sleep 1
-echo [REBOOTING] ..
-sleep 1
-echo [REBOOTING] ...
-sleep 1
-
 {chaotic_cx}
 
-# Network utils.
+echo [INSTALL] .
+sleep 1
+echo [INSTALL] ..
+sleep 1
+echo [INSTALL] ...
+sleep 1
+
+# Network utils
 sudo pacman -Syu --noconfirm ufw
 
-# Cryptograhpic utils.
+# Cryptograhpic utils
 sudo pacman -S --noconfirm gnupg
 
-# Filesystem formats.
+# Filesystem formats
 sudo pacman -S --noconfirm ntfs-3g exfat-utils udiskie
             "#,
         )
@@ -332,22 +326,6 @@ sudo pacman -S --noconfirm ntfs-3g exfat-utils udiskie
             )
             .unwrap();
     }
-
-    // Security: Lockout
-
-    shell
-        .write_str(
-            format!(
-                r#"
-                #echo 'auth optional pam_faildelay.so delay=8000000' > /etc/pam.d/system-login
-                #sed -i 's/# deny = 3/deny = 2/g' /etc/security/faillock.conf
-                #sed -i 's/# fail_interval = 900/fail_interval = 200000000/g' /etc/security/faillock.conf
-                #sed -i 's/# unlock_time = 600/unlock_time = 6000000000/g' /etc/security/faillock.conf
-                "#
-            )
-            .as_str(),
-        )
-        .unwrap();
 
     // Users
 
