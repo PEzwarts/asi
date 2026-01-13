@@ -1,3 +1,5 @@
+pub mod func;
+
 use std::{
     fmt::Write,
     fs::{self, File},
