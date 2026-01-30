@@ -1,6 +1,12 @@
 use std::fmt::Write;
 
-pub fn user(mut shell: String, mut host: String, mut rpass: String, mut users: Vec<String>, mut upass: Vec<String>) -> String {
+pub fn user(
+    mut shell: String,
+    mut host: String,
+    mut rpass: String,
+    mut users: Vec<String>,
+    mut upass: Vec<String>
+    ) -> (String, String, String, Vec<String>, Vec<String>) {
     shell.write_str(
             format!(
                 r#"
@@ -74,5 +80,5 @@ Include = /etc/pacman.d/mirrorlist
         )
         .unwrap();
 
-    return shell;
+    return (shell, host, rpass, users, upass);
 }

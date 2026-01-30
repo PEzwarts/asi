@@ -47,10 +47,26 @@ fn main() {
         mut blk_m
         ) = func::part::part(shell, blk, blk_b, blk_s, blk_m);
 
-    func::disk::disk(shell.clone(), blk_b.clone(), blk_m.clone());
-    let mut shell = func::base::base(shell, de.clone(), gr.clone());
-    let mut shell = func::user::user(shell, host.clone(), rpass.clone(), users, upass);
-    let mut shell = func::boot::boot(shell, blk.clone());
+    func::disk::disk(shell.clone(), blk_b, blk_m);
+
+    let (
+        mut shell,
+        mut de,
+        mut gr,
+        ) = func::base::base(shell, de, gr);
+
+    let (
+        mut shell,
+        mut host,
+        mut rpass,
+        mut users,
+        mut upass
+        ) = func::user::user(shell, host, rpass, users, upass);
+
+    let (
+        mut shell,
+        mut blk
+        ) = func::boot::boot(shell, blk);
 
     shell.write_str(
             format!(

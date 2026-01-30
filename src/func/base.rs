@@ -1,6 +1,6 @@
 use std::fmt::Write;
 
-pub fn base(mut shell: String, mut de: String, mut gr: String) -> String {
+pub fn base(mut shell: String, mut de: String, mut gr: String) -> (String, String, String) {
     println!("[gnome, plasma-desktop, xfce4, ..., none]\nChoose an desktop enviroment:");
     de = text_io::read!();
 
@@ -31,7 +31,7 @@ pub fn base(mut shell: String, mut de: String, mut gr: String) -> String {
             )
             .unwrap();
 
-        return shell;
+        return (shell, de, gr);
     } else {
         shell.write_str(
                 format!(
@@ -45,6 +45,6 @@ pub fn base(mut shell: String, mut de: String, mut gr: String) -> String {
             )
             .unwrap();
 
-        return shell;
+        return (shell, de, gr);
     }
 }

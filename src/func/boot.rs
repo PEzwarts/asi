@@ -1,6 +1,6 @@
 use std::{fmt::Write, path::PathBuf};
 
-pub fn boot(mut shell: String, blk: String) -> String {
+pub fn boot(mut shell: String, blk: String) -> (String, String) {
     if PathBuf::from("/sys/firmware/efi/").exists() {
         shell.write_str(
                 format!(
@@ -14,7 +14,7 @@ pub fn boot(mut shell: String, blk: String) -> String {
             )
             .unwrap();
 
-        return shell;
+        return (shell, blk);
     } else {
         shell.write_str(
                 format!(
@@ -28,6 +28,6 @@ pub fn boot(mut shell: String, blk: String) -> String {
             )
             .unwrap();
 
-        return shell;
+        return (shell, blk);
     }
 }
