@@ -52,8 +52,6 @@ fn main() {
     let mut shell = func::user::user(shell, host.clone(), rpass.clone(), users, upass);
     let mut shell = func::boot::boot(shell, blk.clone());
 
-    // Services
-
     shell.write_str(
             format!(
                 r#"

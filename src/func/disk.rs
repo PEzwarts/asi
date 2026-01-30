@@ -16,8 +16,6 @@ pub fn disk(
         )
         .unwrap();
 
-    // Mount
-
     if PathBuf::from("/sys/firmware/efi/").exists() {
         shell.write_str(
                 format!(
