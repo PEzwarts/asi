@@ -1,5 +1,5 @@
 
-## Version 1.0.2-s (stable)
+## Version 1.1.2-s (stable)
 
 ASI is an Rust based Open-Source Project.
 
