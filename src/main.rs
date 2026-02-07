@@ -91,13 +91,9 @@ fn main() {
     fs::write(
         "/mnt/README.md",
         format!(
-            "
-min.sh is used for an minimal installation of software used by many.
-
-srv.sh is used for an minimal installation of software used by server maintainers.
-
-harden.sh is used to harden your current system to be more resistant towards malware. This is optional.
-            "
+"min.sh is used for an minimal installation of software used by many.
+srv.sh is used for an minimal installation of software used by system engineers.
+harden.sh is used to harden your current system to be more resistant towards malware. This is optional."
         )
         .as_str(),
     )

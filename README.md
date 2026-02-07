@@ -1,9 +1,9 @@
 
 ## Version 1.1.2-s (stable)
 
-ASI is an Rust based Open-Source Project.
+ASI (Arch System Installer) is an Rust based Open-Source project.
 
-ASI is an acronym which stands for Arch System Installer, intended to be used to install an base Arch Operating System on your computer. It comes with pre-installed bash scripts in the root folder to harden or install caliber class software depending on your needs, whether it is used for servers or personal use. ASI is the way to go!
+This project is intended to be used to install an base Arch Operating System on your computer. It comes with pre-installed bash scripts in the root directory to harden or install software depending on your needs, whether it is used for servers or personal use. ASI is the way to go!
 
 ### Features
 
@@ -13,16 +13,22 @@ ASI is an acronym which stands for Arch System Installer, intended to be used to
 
 ### Usage with Ventoy
 
+Run these following bash commands with its associated ISO enviroment.
+
 ./build.sh
-umount /dev/Ventoy
+umount /path/to/ventoy
 
-**Boot into post-install Arch enviroment
+Use an Arch ISO to boot into an post-install enviroment.
 
-**Use an ethernet cable
+mkdir mnt
+mount /path/to/ventoy ./mnt
+cd ./mnt
+
+Connect to wifi before running the ASI binary.
 
 ./arch
 
-**After booting into your system
+After booting into your system.
 
 sudo systemctl enable --now NetworkManager wpa_supplicant
 
