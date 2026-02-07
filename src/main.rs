@@ -47,7 +47,11 @@ fn main() {
         mut blk_m
         ) = func::part::part(shell, blk, blk_b, blk_s, blk_m);
 
-    func::disk::disk(shell.clone(), blk_b, blk_m);
+    let (
+        mut shell,
+        mut blk_b,
+        mut blk_m
+        ) = func::disk::disk(shell.clone(), blk_b, blk_m);
 
     let (
         mut shell,

@@ -4,7 +4,7 @@ pub fn disk(
     mut shell: String,
     blk_b: String,
     blk_m: String
-    ) {
+    ) -> (String, String, String) {
     shell.write_str(
             format!(
                 r#"
@@ -27,6 +27,8 @@ pub fn disk(
                 .as_str(),
             )
             .unwrap();
+
+        return (shell, blk_b, blk_m);
     } else {
         shell.write_str(
                 format!(
@@ -38,5 +40,7 @@ pub fn disk(
                 .as_str(),
             )
             .unwrap();
+
+        return (shell, blk_b, blk_m);
     }
 }
