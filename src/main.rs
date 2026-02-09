@@ -37,8 +37,6 @@ fn main() {
     let min: String = format_args!(include_str!("./bash/min.sh"), chaotic_cx).to_string();
     let srv: String = format_args!(include_str!("./bash/srv.sh"), chaotic_cx).to_string();
 
-    // Partition
-
     let (
         mut shell,
         mut blk,
