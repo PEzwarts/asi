@@ -1,5 +1,5 @@
 
-## Version 1.1.2-s (stable)
+## Version 1.2.2-s (stable)
 
 ASI (Arch System Installer) is an Rust based Open-Source project.
 

@@ -43,11 +43,17 @@ pub fn part(
     println!("Choose boot partition /dev/... :");
     blk_b = text_io::read!();
 
+    Command::new("clear").status().unwrap();
+
     println!("Choose base partition /dev/... :");
     blk_m = text_io::read!();
 
+    Command::new("clear").status().unwrap();
+
     println!("Type Return/Enter key for no swap\nChoose an swap partition /dev/... :");
     blk_s = text_io::read!();
+
+    Command::new("clear").status().unwrap();
 
     if blk_s.len() > 0 {
         shell.write_str(

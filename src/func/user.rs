@@ -1,4 +1,4 @@
-use std::fmt::Write;
+use std::{fmt::Write, process::Command};
 
 pub fn user(
     mut shell: String,
@@ -21,11 +21,17 @@ pub fn user(
     println!("Choose an hostname:");
     host = text_io::read!();
 
+    Command::new("clear").status().unwrap();
+
     println!("Choose an root passwd:");
     rpass = text_io::read!();
 
+    Command::new("clear").status().unwrap();
+
     println!("Create an X amount of users:");
     let q_users: usize = text_io::read!();
+
+    Command::new("clear").status().unwrap();
 
     for i in 0..q_users {
         println!("Choose an username for user{}", i + 1);

@@ -7,3 +7,5 @@
 
 1.1.2-s
 * More organized codebase with func & bash dir.
+
+1.2.2-s

@@ -1,11 +1,15 @@
-use std::fmt::Write;
+use std::{fmt::Write, process::Command};
 
 pub fn base(mut shell: String, mut de: String, mut gr: String) -> (String, String, String) {
     println!("[gnome, plasma-desktop, xfce4, ..., none]\nChoose an desktop enviroment:");
     de = text_io::read!();
 
+    Command::new("clear").status().unwrap();
+
     println!("[gdm, sddm, lightdm, ..., none]\nChoose an greeter:");
     gr = text_io::read!();
+
+    Command::new("clear").status().unwrap();
 
     shell.write_str(
             format!(
