@@ -26,7 +26,23 @@ pub fn base(mut shell: String, mut de: String, mut gr: String) -> (String, Strin
         shell.write_str(
                 format!(
                     r#"
-                    pacstrap -K /mnt base base-devel linux-lts linux-lts-headers linux-firmware grub efibootmgr xorg wayland amd-ucode intel-ucode alsa-firmware alsa-utils pulseaudio networkmanager wpa_supplicant reflector kitty git wget vim
+                    pacstrap -K /mnt base \
+                                    base-devel \
+                                    linux-lts \
+                                    linux-lts-headers \
+                                    linux-firmware \
+                                    grub \
+                                    efibootmgr \
+                                    amd-ucode \
+                                    intel-ucode \
+                                    alsa-firmware \
+                                    alsa-utils \
+                                    pulseaudio \
+                                    networkmanager \
+                                    iwd \
+                                    reflector \
+                                    git \
+                                    vim \
                     genfstab -U /mnt >> /mnt/etc/fstab
                     arch-chroot /mnt /bin/bash -c "
                     "#
@@ -40,7 +56,26 @@ pub fn base(mut shell: String, mut de: String, mut gr: String) -> (String, Strin
         shell.write_str(
                 format!(
                     r#"
-                    pacstrap -K /mnt base base-devel linux-lts linux-lts-headers linux-firmware grub efibootmgr xorg wayland amd-ucode intel-ucode alsa-firmware alsa-utils pulseaudio networkmanager wpa_supplicant reflector {de} {gr} kitty git wget vim
+                    pacstrap -K /mnt \
+                                base \
+                                base-devel \
+                                linux-lts \
+                                linux-lts-headers \
+                                linux-firmware \
+                                grub \
+                                efibootmgr \
+                                amd-ucode \
+                                intel-ucode \
+                                alsa-firmware \
+                                alsa-utils \
+                                pulseaudio \
+                                networkmanager \
+                                iwd \
+                                reflector \
+                                {de} \
+                                {gr} \
+                                git \
+                                vim \
                     genfstab -U /mnt >> /mnt/etc/fstab
                     arch-chroot /mnt /bin/bash -c "
                     "#
