@@ -76,7 +76,7 @@ pub fn base(mut shell: String, mut de: String, mut gr: String) -> (String, Strin
                                 {gr} \
                                 git \
                                 vim \
-                    genfstab -U /mnt >> /mnt/etc/fstab
+                    genfstab -U /mnt > /mnt/etc/fstab
                     arch-chroot /mnt /bin/bash -c "
                     "#
                 )
